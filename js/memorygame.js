@@ -21,8 +21,27 @@ For tiles
 var matchesLeft = 8;
 var attempts = 0;
 
-function makeBoard() {
+/*function makeBoard() {
+	
+
+
 	// initialize needed variables
 	// attain random 8 pics from 32
 	// duplicate each of those 8 to create 8 pairs, 16 in total
+}*/
+
+// timer for when start button is clicked
+
+
+var gameBoard = _.shuffle_.(range(1, 33));
+
+
+
+
+var startTime = _.now();
+console.log(startTime);
+
+function onTimer() {
+	var elapsedSeconds = Math.floor((_.now() - startTime) / 10);
+	console.log(elapsedSeconds);
 }
