@@ -1,4 +1,6 @@
 "use strict";
+//Billy Cen
+
 
 // first need to attain all the images, for-each loop?
 // then shuffle
