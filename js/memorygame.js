@@ -28,7 +28,7 @@ var timer;
 for (var index = 1; index <= 32; index++) {
 	tileStorage.push({
 	src: "img/tile" + index + ".jpg",
-	matched: false,
+	match: false,
 	clicked: false
 	});
 }
@@ -41,9 +41,51 @@ $(document).ready(function() {
 	var unmatched = 8;
 	var tries = 0;
 
+    $('#game-board').css('display', 'none');
+    $('#game-board').empty();
+    $('#game-board').css('display', 'inline');
+    $('#win').css('display', 'none'); 
+    $('#found').text('Pairs found: ');
+    $('#remain').text('Pairs left: ');
+    $('#attempts').text('Turns ta      ken: ');
+
+
 	var gameTiles = [];
 	tileStorage = _.shuffle(tileStorage);
-	gameTiles = tileStorage.slice(0, 8);
+	gameTiles = tileStorage.slice(0, 8); //selected pictures for game
+
+	matches = 8;
+
+	startTime = _.now();
+	timer = window.setInterval(onTimer, 1000);
+
+	_.forEach(gameTiles, function(tile) {
+		tile.clicked = false;
+		tile.matched = false;
+		gameTiles.push(_.clone(tile)); //make pairs 
+	}); 
+
+	gameTiles = _.shuffle(gameTiles) //shuffles the tile pairs
+
+	var board = $('#game-board');
+	var row = $(document.createElement('div'));
+
+
+    _.forEach(gameTiles, function(tile, tileIndex) {
+        if (tileIndex > 0 && tileIndex % 4 == 0) {
+            board.append(row);
+            row = $(document.createElement('div'));
+        }
+        var image = $(document.createElement('img'));
+        image.attr('src', 'img/tile-back.png'); //swap to 'img/tile-back.png' for start
+        image.attr('alt', 'tile ' + tile.num);
+        image.attr('width', '250px');
+        
+        image.data('tile', tile);
+        
+        row.append(image);
+    });
+    board.append(row);
 
 
 
@@ -54,6 +96,17 @@ $(document).ready(function() {
 
 
 
+
+
+
+
+
+
+
+	if (matches == 8) { // stop timer and display winning message
+		stopTime();
+		$('#game-board').text('Congratulations! You are a BAWSS.');
+	}
 
 	}); //begin.click()
 
@@ -63,7 +116,7 @@ $(document).ready(function() {
 
 
 
-startTime = _.now();
+
 
 function onTimer() {
 	elapsedSeconds = Math.floor((_.now() - startTime) / 1000);

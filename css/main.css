@@ -1,5 +1,7 @@
-#memory-board {
-	
+#game-board img {
+	width: 25%;
+	height: 25%;
+	padding: 4px;
 }
 
 h1 {
