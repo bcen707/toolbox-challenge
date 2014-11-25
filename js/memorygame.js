@@ -35,85 +35,87 @@ for (var index = 1; index <= 32; index++) {
 	
 $(document).ready(function() {
 	$('#begin').click(function() {
-	elapsedSeconds = 0;
-	var matches = 0;
-	var unmatched = 8;
-	var tries = 0;
+		elapsedSeconds = 0;
+		var matches = 0;
+		var unmatched = 8;
+		var tries = 0;
 
-	$('#game-board').empty();
-    $('#game-board').css('display', 'none');
-    $('#game-board').css('display', 'inline');
-    $('#win').css('display', 'none'); 
-    $('#found').text('Pairs found: ');
-    $('#remain').text('Pairs left: ');
-    $('#attempts').text('Turns taken: ');
-
-
-	var gameTiles = [];
-	tileStorage = _.shuffle(tileStorage);
-	gameTiles = tileStorage.slice(0, 8); //selected pictures for game
-
-	startTime = _.now();
-	timer = window.setInterval(onTimer, 1000);
-
-	_.forEach(gameTiles, function(tile) {
-		tile.clicked = false;
-		tile.matched = false;
-		gameTiles.push(_.clone(tile)); //make pairs 
-	}); 
-
-	gameTiles = _.shuffle(gameTiles) //shuffles the tile pairs
-
-	var board = $('#game-board');
-	var row = $(document.createElement('div')); //create a div for the game board
+		$('#game-board').empty();
+	    $('#game-board').css('display', 'none');
+	    $('#game-board').css('display', 'inline');
+	    $('#win').css('display', 'none'); 
+	    $('#found').text('Pairs found: ' + matches);
+	    $('#remain').text('Pairs left: ' + unmatched);
+	    $('#attempts').text('Turns taken: ' + tries);
 
 
-    _.forEach(gameTiles, function(tile, tileIndex) {
-        if (tileIndex > 0 && tileIndex % 4 == 0) {
-            board.append(row);
-            row = $(document.createElement('div'));
-        }
-        var image = $(document.createElement('img'));
-        image.attr('src', 'img/tile-back.png'); //swap to 'img/tile-back.png' for start
-        image.attr('alt', 'tile ' + tile.num);
-        image.attr('width', '100px');
-        
-        image.data('tile', tile);
-        
-        row.append(image);
-    });
-    board.append(row);
+		var gameTiles = [];
+		tileStorage = _.shuffle(tileStorage);
+		gameTiles = tileStorage.slice(0, 8); //selected pictures for game
+
+		startTime = _.now();
+		timer = window.setInterval(onTimer, 1000);
+
+		_.forEach(gameTiles, function(tile) {
+			tile.clicked = false;
+			tile.matched = false;
+			gameTiles.push(_.clone(tile)); //make pairs 
+		}); 
+
+		gameTiles = _.shuffle(gameTiles) //shuffles the tile pairs
+
+		var board = $('#game-board');
+		var row = $(document.createElement('div')); //create a div for the game board
 
 
-
-    var clicks = 0;
-    var first;
-    var second;
+	    _.forEach(gameTiles, function(tile, tileIndex) {
+	        if (tileIndex > 0 && tileIndex % 4 == 0) {
+	            board.append(row);
+	            row = $(document.createElement('div'));
+	        }
+	        var image = $(document.createElement('img'));
+	        image.attr('src', 'img/tile-back.png'); //swap to 'img/tile-back.png' for start
+	        image.attr('alt', 'tile ' + tile.num);
+	        image.attr('width', '100px');
+	        
+	        image.data('tile', tile);
+	        
+	        row.append(image);
+	    });
+	    board.append(row);
 
 
 
-    if (clicks % 2 == 0) {
-
-    }
-
-    else { // # of clicks is odd
-
-    }
+	    var clicks = 0;
+	    var first;
+	    var second;
 
 
+	    $('game-board img').click(function() {
+	    	if (clicks % 2 == 0) { //only want to check if tiles match when # of clicks is even
+	    		second = $(this);
+	    		reveal(second.data('tile'), second);
+	    	}
 
-
+	    	else { // # of clicks is odd
+				first = $(this);
+				reveal(tile1.data('tile'), first);
+	    	}
 
 
 
 
 
-		if (matches == 8) { // stop timer and display winning message
-			stopTime();
-			$('#win').css('display', 'block');
-		}
 
 
+
+
+			if (matches == 8) { // stop timer and display winning message
+				stopTime();
+				$('#win').css('display', 'block');
+			}
+
+		}); //img.click()	
 	}); //begin.click()
 
 
