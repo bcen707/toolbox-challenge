@@ -39,8 +39,9 @@ $(document).ready(function() {
 	var unmatched = 8;
 	var tries = 0;
 
-
-
+	var gameTiles = [];
+	tileStorage = _.shuffle(tileStorage);
+	gameTiles = tileStorage.slice(0, 8);
 
 
 
@@ -61,7 +62,6 @@ $(document).ready(function() {
 
 
 startTime = _.now();
-console.log(startTime);
 
 function onTimer() {
 	elapsedSeconds = Math.floor((_.now() - startTime) / 1000);
