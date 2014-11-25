@@ -18,19 +18,44 @@ For tiles
 - how many tiles have been clicked?
 */
 
-var gameTiles = [];
+var tileStorage = [];
 var elapsedSeconds;
 var startTime;
 var timer;
 
 for (var index = 1; index <= 32; index++) {
-	gameTiles.push({
+	tileStorage.push({
 	src: "img/tile" + index + ".jpg",
 	matched: false,
 	clicked: false
 	});
 }
 	
+$(document).ready(function() {
+	$('#begin').click(function() {
+
+	elapsedSeconds = 0;
+	var matches = 0;
+	var unmatched = 8;
+	var tries = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}); //begin.click()
+
+
+}); //document.ready()
 
 
 
