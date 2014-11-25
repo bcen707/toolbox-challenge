@@ -1,13 +1,37 @@
-<!doctype html>
-
+<!DOCTYPE HTML>
 <html lang="en">
-<head>
-	<title>Memory Game</title>
-</head>
-
-<body>
-	<h1>Awesome Memory Game!!</h1>
-	<div id="memory-board"></div>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Awesome Memory Game</title>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/main.css"/>
+    </head>
+    <body>
+      <main>
+       
+        <header>
+            <h1>Let's Play Memory!</h1>
+        </header>
+        <button id="start" type="button" class="btn btn-primary">
+            Begin new game
+        </button>
+        
+         <p id="time">Game duration: __ seconds!</p>
+         <p id="found">Pairs found</p>
+         <p id="remain">Pairs left</p>
+         <p id="attempts">Turns taken</p>
+         
+         <section id="game-board">
+         </section>
+         
+         <!-- <img id> -->
+         
+      </main>
+       
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/script.js"></script>
+    </body>
 </html>
