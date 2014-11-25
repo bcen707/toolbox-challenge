@@ -35,26 +35,23 @@ for (var index = 1; index <= 32; index++) {
 	
 $(document).ready(function() {
 	$('#begin').click(function() {
-
 	elapsedSeconds = 0;
 	var matches = 0;
 	var unmatched = 8;
 	var tries = 0;
 
+	$('#game-board').empty();
     $('#game-board').css('display', 'none');
-    $('#game-board').empty();
     $('#game-board').css('display', 'inline');
     $('#win').css('display', 'none'); 
     $('#found').text('Pairs found: ');
     $('#remain').text('Pairs left: ');
-    $('#attempts').text('Turns ta      ken: ');
+    $('#attempts').text('Turns taken: ');
 
 
 	var gameTiles = [];
 	tileStorage = _.shuffle(tileStorage);
 	gameTiles = tileStorage.slice(0, 8); //selected pictures for game
-
-	matches = 8;
 
 	startTime = _.now();
 	timer = window.setInterval(onTimer, 1000);
@@ -68,7 +65,7 @@ $(document).ready(function() {
 	gameTiles = _.shuffle(gameTiles) //shuffles the tile pairs
 
 	var board = $('#game-board');
-	var row = $(document.createElement('div'));
+	var row = $(document.createElement('div')); //create a div for the game board
 
 
     _.forEach(gameTiles, function(tile, tileIndex) {
@@ -79,7 +76,7 @@ $(document).ready(function() {
         var image = $(document.createElement('img'));
         image.attr('src', 'img/tile-back.png'); //swap to 'img/tile-back.png' for start
         image.attr('alt', 'tile ' + tile.num);
-        image.attr('width', '250px');
+        image.attr('width', '100px');
         
         image.data('tile', tile);
         
@@ -89,6 +86,19 @@ $(document).ready(function() {
 
 
 
+    var clicks = 0;
+    var first;
+    var second;
+
+
+
+    if (clicks % 2 == 0) {
+
+    }
+
+    else { // # of clicks is odd
+
+    }
 
 
 
@@ -98,29 +108,35 @@ $(document).ready(function() {
 
 
 
+		if (matches == 8) { // stop timer and display winning message
+			stopTime();
+			$('#win').css('display', 'block');
+		}
 
-
-
-
-
-	if (matches == 8) { // stop timer and display winning message
-		stopTime();
-		$('#game-board').text('Congratulations! You are a BAWSS.');
-	}
 
 	}); //begin.click()
 
 
 }); //document.ready()
 
-
+function reveal(tile, image) {
+    image.fadeOut(25, function() {
+        if (tile.clicked) {
+            image.attr('src', 'img/tile-back.png');
+        } else {
+            image.attr('src', tile.src)
+        }
+        tile.clicked = !tile.clicked;
+        image.fadeIn(75);
+    });
+};
 
 
 
 
 function onTimer() {
 	elapsedSeconds = Math.floor((_.now() - startTime) / 1000);
-	console.log(elapsedSeconds);
+	$('#time').text("Game duration: " + elapsedSeconds + " seconds");
 } //onTimer()
 
 function stopTime() {
