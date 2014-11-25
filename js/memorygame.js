@@ -39,11 +39,10 @@ $(document).ready(function() {
 		var matches = 0;
 		var unmatched = 8;
 		var tries = 0;
-
+		$('#win').css('display', 'none');
 		$('#game-board').empty();
 	    $('#game-board').css('display', 'none');
 	    $('#game-board').css('display', 'inline');
-	    $('#win').css('display', 'none'); 
 	    $('#found').text('Pairs found: ' + matches);
 	    $('#remain').text('Pairs left: ' + unmatched);
 	    $('#attempts').text('Turns taken: ' + tries);
@@ -70,7 +69,7 @@ $(document).ready(function() {
 
 	    _.forEach(gameTiles, function(tile, tileIndex) {
 	        if (tileIndex % 4 == 0 && tileIndex > 0) {
-	            board.append(row);
+	            board.append(row); 
 	            row = $(document.createElement('div'));
 	        }
 	        var image = $(document.createElement('img'));
@@ -83,7 +82,6 @@ $(document).ready(function() {
 	        row.append(image);
 	    });
 	    board.append(row);
-
 
 
 	    var clicks = 0;
@@ -134,8 +132,6 @@ function reveal(tile, image) {
         image.fadeIn(75);
     });
 };
-
-
 
 
 function onTimer() {
