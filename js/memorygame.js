@@ -18,30 +18,32 @@ For tiles
 - how many tiles have been clicked?
 */
 
-var matchesLeft = 8;
-var attempts = 0;
+var gameTiles = [];
+var elapsedSeconds;
+var startTime;
+var timer;
 
-/*function makeBoard() {
+for (var index = 1; index <= 32; index++) {
+	gameTiles.push({
+	src: "img/tile" + index + ".jpg",
+	matched: false,
+	clicked: false
+	});
+}
 	
 
 
-	// initialize needed variables
-	// attain random 8 pics from 32
-	// duplicate each of those 8 to create 8 pairs, 16 in total
-}*/
-
-// timer for when start button is clicked
 
 
-var gameBoard = _.shuffle_.(range(1, 33));
-
-
-
-
-var startTime = _.now();
+startTime = _.now();
 console.log(startTime);
 
 function onTimer() {
-	var elapsedSeconds = Math.floor((_.now() - startTime) / 10);
+	elapsedSeconds = Math.floor((_.now() - startTime) / 1000);
 	console.log(elapsedSeconds);
-}
+} //onTimer()
+
+function stopTime() {
+	window.clearInterval(timer);
+} // stopTime()
+
