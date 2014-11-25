@@ -27,8 +27,8 @@ var timer;
 
 for (var index = 1; index <= 32; index++) {
 	tileStorage.push({
-	src: "img/tile" + index + ".jpg",
-	match: false,
+	src: "img/tile" + index + ".jpg", // gives each tile these attributes
+	matched: false,
 	clicked: false
 	});
 }
@@ -69,14 +69,14 @@ $(document).ready(function() {
 
 
 	    _.forEach(gameTiles, function(tile, tileIndex) {
-	        if (tileIndex > 0 && tileIndex % 4 == 0) {
+	        if (tileIndex % 4 == 0 && tileIndex > 0) {
 	            board.append(row);
 	            row = $(document.createElement('div'));
 	        }
 	        var image = $(document.createElement('img'));
 	        image.attr('src', 'img/tile-back.png'); //swap to 'img/tile-back.png' for start
 	        image.attr('alt', 'tile ' + tile.num);
-	        image.attr('width', '100px');
+	        image.attr('width', '200px');
 	        
 	        image.data('tile', tile);
 	        
@@ -95,6 +95,14 @@ $(document).ready(function() {
 	    	if (clicks % 2 == 0) { //only want to check if tiles match when # of clicks is even
 	    		second = $(this);
 	    		reveal(second.data('tile'), second);
+	    		if (first.data('tile').num == second.data('tile').num) {//the tiles match
+	    			unmatched--;
+	    			matches++;
+
+	    			first.matched = true;
+	    			second.matched = true;
+
+	    		}
 	    	}
 
 	    	else { // # of clicks is odd
@@ -103,19 +111,13 @@ $(document).ready(function() {
 	    	}
 
 
-
-
-
-
-
-
-
 			if (matches == 8) { // stop timer and display winning message
 				stopTime();
 				$('#win').css('display', 'block');
 			}
 
-		}); //img.click()	
+		}); //img.click()
+		
 	}); //begin.click()
 
 
